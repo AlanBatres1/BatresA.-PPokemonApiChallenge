@@ -24,7 +24,34 @@
         </div>
     </div>
     <img id="randomBtn" src="/assets/Adobe Express - file.png" class="w-[35px] h-[35px] mt-2 cursor-pointer" alt="random icon">
-    <img id="favBtn" src="/assets/gaming (1).png" class="w-[35px] h-[35px] mt-2 cursor-pointer" alt="pokeball">
+    
+    <!-- Favorites Section -->
+    <img id="favBtn" data-modal-target="default-modal3" data-modal-toggle="default-modal3" src="/assets/gaming (1).png" class="w-[35px] h-[35px] mt-2 cursor-pointer" alt="pokeball">
+    <!-- Main modal -->
+  <div id="default-modal3" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full  h-[calc(100%-1rem)] max-h-full">
+    <div class="relative w-[410px]">
+        <!-- Modal content -->
+        <div class="relative bg-white top-[137px] rounded-[15px] shadow-sm dark:bg-gray-700 h-[530px]">
+            <!-- Modal header -->
+            <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600 border-gray-200">
+                <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                    Favorites
+                </h3>
+                <button type="button" class=" cursor-pointer text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="default-modal3">
+                    <svg class="w-3 h-3 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                    </svg>
+                    <span class="sr-only">Close modal</span>
+                </button>
+            </div>
+            <!-- Modal body -->
+            <div class="p-4 md:p-5 space-y-4">
+                <p id="favorites" class=" text-[10px] text-base leading-relaxed text-gray-500 dark:text-gray-400"></p>
+            </div>
+            <!-- Modal footer -->
+        </div>
+    </div>
+</div>
 </div>
 </header>
 
@@ -39,20 +66,19 @@
     <div class="bg-white w-[388px] h-[210px] relative bottom-[190px] rounded-t-[7px] rounded-b-[6px] flex justify-center flex-col items-center">
         <h1 id="pokemonName" class="text-rock text-water text-poison text-fairy text-ghost text-fighting text-dark text-dragon text-electric text-flying text-ground text-ice text-psychic text-steel text-normal text-bug text-grass text-fire text-[18px] font-[Inter] font-bold">Charmander</h1>
 
-        <div class="flex flex-row gap-3">
+        <div id="gap" class="flex flex-row gap-3">
             <p id="pokemonType" class="bg-rock bg-water bg-poison bg-fairy bg-ghost bg-fighting bg-dark bg-dragon bg-electric bg-flying bg-ground bg-ice bg-psychic bg-steel bg-normal bg-bug bg-grass bg-fire rounded-[14px] p-[5px] text-white font-[Inter] font-bold"></p>
             <p id="pokemonType2" class="bg-rock bg-water bg-poison bg-fairy bg-ghost bg-fighting bg-dark bg-dragon bg-electric bg-flying bg-ground bg-ice bg-psychic bg-steel bg-normal bg-bug bg-grass bg-fire rounded-[14px] p-[5px] text-white font-[Inter] font-bold"></p>
         </div>
         <div class="text-center flex flex-row items-center ">
-            <div class="w-[125px]">
+            <div class="w-[140px]">
                 <p id="pokemonLocation" class="text-[12px]">N/A</p>
                 <p class="text-[10px]">Location</p>
             </div>
-            <div class="w-[125px]">
-                <p class="text-[12px]">0,6m</p>
-                <p class="text-[10px]">Height</p>
+            <div class="w-[90px]">
+                
             </div>
-            <div class="w-[125px]">
+            <div class="w-[140px]">
                 <p id="ability1" class="text-[12px]">Blaze</p>
                 <p id="ability2" class="text-[12px]">Solar-Power</p>
                 <p class="text-[10px]">Abilities</p>
@@ -60,8 +86,7 @@
         </div>
         
 
-
-<!-- Modal toggle -->
+<!-- Moves Section -->
 <button id="movesBtn" data-modal-target="default-modal" data-modal-toggle="default-modal" class=" bg-rock bg-water bg-poison bg-fairy bg-ghost bg-fighting bg-dark bg-dragon bg-electric bg-flying bg-ground bg-ice bg-psychic bg-steel bg-normal bg-bug bg-grass bg-fire cursor-pointer text-white  rounded-[14px] p-[5px] font-[Inter] font-bold" type="button">
     Moves
   </button>
@@ -86,16 +111,15 @@
               <!-- Modal body -->
               <div class="p-4 md:p-5 space-y-4">
                   <p id="moves" class=" text-[10px] text-base leading-relaxed text-gray-500 dark:text-gray-400">
-                     
                   </p>
-                  
               </div>
               <!-- Modal footer -->
           </div>
       </div>
   </div>
   
-        <!-- Modal toggle -->
+  
+ <!-- Evolution Section -->
 <button id="evolutionBtn" data-modal-target="default-modal2" data-modal-toggle="default-modal2" class="bg-rock bg-water bg-poison bg-fairy bg-ghost bg-fighting bg-dark bg-dragon bg-electric bg-flying bg-ground bg-ice bg-psychic bg-steel bg-normal bg-bug bg-grass bg-fire cursor-pointer text-white rounded-[14px] p-[5px] font-[Inter] font-bold mt-3" type="button">
     Evolution
   </button>
@@ -131,14 +155,10 @@
     </div>
     <img id="shinyBtn" src="/assets/sparkling.png" class="w-[40px] h-[40px] relative left-[10px] bottom-[240px] cursor-pointer" alt="Shiny Icon">
     <p id="pokemonIndex" class="relative left-[10px] bottom-[730px] text-white font-[Inter] font-bold w-[100px]">#004</p>
-
-
-    
-
     </div>
 </div>
 
-    <script src="/scripts/app.js"></script>
+    <script type="module" src="/scripts/app.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/flowbite@3.0.0/dist/flowbite.min.js"></script>
 </body>
 </html>

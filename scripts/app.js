@@ -1,3 +1,5 @@
+import { saveToLocalStorageByName, getLocalStorage, removeFromLocalStorage } from "./localStorage.js";
+
 const pokemonImg = document.getElementById("pokemonImg");
 const pokemonName = document.getElementById("pokemonName");
 const pokemonType = document.getElementById("pokemonType");
@@ -10,6 +12,8 @@ const ability2 = document.getElementById("ability2");
 const moves = document.getElementById("moves");
 const evolution = document.getElementById("evolution");
 const defaultSearch = document.getElementById("default-search");
+const favorites = document.getElementById("favorites");
+const gap = document.getElementById("gap")
 // Buttons
 const setFavBtn = document.getElementById("setFavBtn");
 const shinyBtn = document.getElementById("shinyBtn");
@@ -57,9 +61,53 @@ async function displayEvolutionChain(chain) {
     });
 }
 
-// function to capatalize first letter of string
+// function to capitalize first letter of string
 function capitalize(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+function updateFavBtn(pokemonName) {
+    const favoritesList = getLocalStorage();
+    
+    if (favoritesList.includes(pokemonName)) {
+        setFavBtn.src = "./assets/gaming (1).png";
+    } else {
+        setFavBtn.src = "./assets/gaming.png";
+    }
+}
+
+function createFavoriteItem(pokemonName) {
+    const item = document.createElement('div');
+    item.className = 'flex justify-between items-center p-2 text-[20px] text-white';
+    
+    //clickable name
+    const nameSpan = document.createElement('span');
+    nameSpan.textContent = capitalize(pokemonName);
+    nameSpan.className = 'cursor-pointer';
+    nameSpan.addEventListener('click', async () => {
+        defaultSearch.value = pokemonName;
+        await searchBtn.click();
+    });
+    
+    // remove btn
+    const removeBtn = document.createElement('button');
+    removeBtn.textContent = 'x';
+    removeBtn.className = 'text-fighting font-bold text-[20px] px-2 cursor-pointer';
+    
+    removeBtn.addEventListener('click', () => {
+        removeFromLocalStorage(pokemonName);
+        item.remove();
+        
+        // Update favorite button
+        if (pokemon.species && pokemon.species.name === pokemonName) {
+            setFavBtn.src = "./assets/gaming.png";
+        }
+    });
+    
+    item.appendChild(nameSpan);
+    item.appendChild(removeBtn);
+    
+    return item;
 }
 
 // Shiny activation
@@ -75,25 +123,42 @@ shinyBtn.addEventListener("click", () => {
     }
 });
 
+// Favorite button event listener
 setFavBtn.addEventListener("click", () => {
-        if (setFavBtn.src.includes("gaming.png")) {
-            setFavBtn.src = "./assets/gaming (1).png";
-            
-        } else {
-            setFavBtn.src = "./assets/gaming.png";
-        }
+    if (!pokemon.species) return; 
+    const pokemonName = pokemon.species.name;
+
+    if (setFavBtn.src.includes("gaming.png")) {
+        setFavBtn.src = "./assets/gaming (1).png";
+        saveToLocalStorageByName(pokemonName);
+    } else {
+        setFavBtn.src = "./assets/gaming.png";
+        removeFromLocalStorage(pokemonName);
+    }
 });
 
+favBtn.addEventListener("click", async () => {
+    const favoritesList = getLocalStorage();
+    favorites.innerHTML = '';
 
-// uses search btn to make enter keypress work
+    const container = document.createElement('div');
+    container.className = 'flex flex-col p-4 ';
+    
+    for (const name of favoritesList) {
+        const item = createFavoriteItem(name);
+        container.appendChild(item);
+    }
+    favorites.appendChild(container);
+});
+
 defaultSearch.addEventListener('keypress', function (e) {
     if (e.key === 'Enter') {
         searchBtn.click();
         console.log("enter")
     }
-})
+});
 
-// Fetch with search btn
+// Search button functionality
 searchBtn.addEventListener('click', async () => {
     userInput = defaultSearch.value;
     const search = userInput.trim().toLowerCase();
@@ -118,8 +183,10 @@ searchBtn.addEventListener('click', async () => {
         pokemonType.innerText = capitalize(primaryType);
         if (primaryType2) {
             pokemonType2.innerText = capitalize(primaryType2);
+            gap.className = "flex flex-row gap-2"; 
         } else {
             pokemonType2.innerText = "";
+            gap.className = "flex flex-row";
         }
 
         pokemonCard.className = `bg-${primaryType} w-[410px] h-[530px] border-[#4B5563] border-[11px] rounded-[15px]`;
@@ -133,13 +200,13 @@ searchBtn.addEventListener('click', async () => {
         const movesList = pokemon.moves.map(move => capitalize(move.move.name)).join(", ");
         moves.innerText = `Moves: ${movesList}`;
 
-        // evolution chain
         const speciesResponse = await fetch(pokemon.species.url);
         const speciesData = await speciesResponse.json();
         const evolutionChain = await getEvolutionChain(speciesData.evolution_chain.url);
 
-        // evolution chain images
         displayEvolutionChain(evolutionChain);
+        
+        updateFavBtn(pokemon.species.name);
     }
     else if (pokemon.id > 650) {
         alert("Please enter a gen 5 pokemon");
@@ -147,8 +214,7 @@ searchBtn.addEventListener('click', async () => {
     }
 });
 
-
-// Search by random btn
+// Random button functionality
 randomBtn.addEventListener('click', async () => {
     const Random = Math.floor(Math.random() * 649) + 1;
     const randomPokemon = await getPokemon(Random);
@@ -174,8 +240,10 @@ randomBtn.addEventListener('click', async () => {
         pokemonType.innerText = capitalize(primaryType);
         if (primaryType2) {
             pokemonType2.innerText = capitalize(primaryType2);
+            gap.className = "flex flex-row gap-2";
         } else {
             pokemonType2.innerText = '';
+            gap.className = "flex flex-row";
         }
 
         pokemonCard.className = `bg-${primaryType} w-[410px] h-[530px] border-[#4B5563] border-[11px] rounded-[15px]`;
@@ -194,11 +262,7 @@ randomBtn.addEventListener('click', async () => {
         const evolutionChain = await getEvolutionChain(speciesData.evolution_chain.url);
 
         displayEvolutionChain(evolutionChain);
+        
+        updateFavBtn(pokemon.species.name);
     }
 });
-
-
-
-
-
-
