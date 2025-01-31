@@ -2,12 +2,12 @@
 
 @font-face {
     font-family: Poppins;
-    src: url(/assets/Poppins-Regular.ttf);
+    src: url(/assets/Fonts/Poppins-Regular.ttf);
 }
 
 @font-face {
     font-family: Inter;
-    src: url(/assets/Inter-VariableFont_opsz\,wght.ttf);
+    src: url(/assets/Fonts/Inter-VariableFont_opsz\,wght.ttf);
 }
 
 
