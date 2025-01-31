@@ -14,42 +14,47 @@
     </div>
 
 <div class="flex justify-center mt-4 gap-1">
-    <form class="row w-[327px] h-[32px]">   
+    <div class="row w-[327px] h-[32px]">   
         <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
         <div class="relative">
-            <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                <img src="/assets/search.png" alt="search icon">
+            <div class="absolute inset-y-0 start-0 flex items-center ps-3 ">
+                <img id="searchBtn" type="button" src="/assets/search.png" class="cursor-pointer" alt="search icon">
             </div>
             <input type="search" id="default-search" class="block w-full p-4 ps-10 text-sm text-gray-900 rounded-full bg-gray-50" placeholder="Search by name/ pokedex number" required />
         </div>
-    </form>
-    <img src="/assets/Adobe Express - file.png" class="w-[35px] h-[35px] mt-2" alt="random icon">
-    <img src="/assets/gaming (1).png" class="w-[35px] h-[35px] mt-2" alt="pokeball">
+    </div>
+    <img id="randomBtn" src="/assets/Adobe Express - file.png" class="w-[35px] h-[35px] mt-2 cursor-pointer" alt="random icon">
+    <img id="favBtn" src="/assets/gaming (1).png" class="w-[35px] h-[35px] mt-2 cursor-pointer" alt="pokeball">
 </div>
 </header>
 
 <div class="flex justify-center mt-[93px]">
-    <div class="bg-fire w-[410px] h-[530px] border-[#4B5563] border-[11px] rounded-[15px]">
+    <!-- Have to apply every class of bg because it doesn't work unless referenced for some reason -->
+    <div id="pokemonCard" class="hidden bg-rock bg-water bg-poison bg-fairy bg-ghost bg-fighting bg-dark bg-dragon bg-electric bg-flying bg-ground bg-ice bg-psychic bg-steel bg-normal bg-bug bg-grass bg-fire w-[410px] h-[530px] border-[#4B5563] border-[11px] rounded-[15px]">
     <img src="/assets/pokeball.png" class="w-[150px] h-[150px] relative left-[200px] top-[15px] " alt="pokeball">
-    <img src="/assets/gaming.png" class="w-[40px] h-[40px] relative left-[340px] bottom-[145px]"  alt="">
+    <img id="setFavBtn" src="/assets/gaming.png" class="w-[40px] h-[40px] relative left-[340px] bottom-[145px] cursor-pointer"  alt="pokeball with sparks">
     <div class="flex justify-center">
-        <img src="/assets/image.png" class="w-[300px] h-[300px] relative bottom-[190px] " alt="Place Holder">
+        <img id="pokemonImg" src="/assets/image.png" class="w-[300px] h-[300px] relative bottom-[190px] " alt="Place Holder">
     </div>
     <div class="bg-white w-[388px] h-[210px] relative bottom-[190px] rounded-t-[7px] rounded-b-[6px] flex justify-center flex-col items-center">
-        <h1 class="text-[#F57D31] text-[18px] font-[Inter] font-bold">Charmander</h1>
-        <p class="bg-fire rounded-[14px] p-[5px] text-white font-[Inter] font-bold">Fire</p>
-        <div class="text-center flex flex-row items-center gap-[15px]">
-            <div class="w-[100px]">
-                <p class="text-[12px]">N/A</p>
+        <h1 id="pokemonName" class="text-rock text-water text-poison text-fairy text-ghost text-fighting text-dark text-dragon text-electric text-flying text-ground text-ice text-psychic text-steel text-normal text-bug text-grass text-fire text-[18px] font-[Inter] font-bold">Charmander</h1>
+
+        <div class="flex flex-row gap-3">
+            <p id="pokemonType" class="bg-rock bg-water bg-poison bg-fairy bg-ghost bg-fighting bg-dark bg-dragon bg-electric bg-flying bg-ground bg-ice bg-psychic bg-steel bg-normal bg-bug bg-grass bg-fire rounded-[14px] p-[5px] text-white font-[Inter] font-bold"></p>
+            <p id="pokemonType2" class="bg-rock bg-water bg-poison bg-fairy bg-ghost bg-fighting bg-dark bg-dragon bg-electric bg-flying bg-ground bg-ice bg-psychic bg-steel bg-normal bg-bug bg-grass bg-fire rounded-[14px] p-[5px] text-white font-[Inter] font-bold"></p>
+        </div>
+        <div class="text-center flex flex-row items-center ">
+            <div class="w-[125px]">
+                <p id="pokemonLocation" class="text-[12px]">N/A</p>
                 <p class="text-[10px]">Location</p>
             </div>
-            <div class="w-[100px]">
+            <div class="w-[125px]">
                 <p class="text-[12px]">0,6m</p>
                 <p class="text-[10px]">Height</p>
             </div>
-            <div class="w-[100px]">
-                <p class="text-[12px]">Blaze</p>
-                <p class="text-[12px]">Solar-Power</p>
+            <div class="w-[125px]">
+                <p id="ability1" class="text-[12px]">Blaze</p>
+                <p id="ability2" class="text-[12px]">Solar-Power</p>
                 <p class="text-[10px]">Abilities</p>
             </div>
         </div>
@@ -57,7 +62,7 @@
 
 
 <!-- Modal toggle -->
-<button data-modal-target="default-modal" data-modal-toggle="default-modal" class="cursor-pointer text-white bg-fire rounded-[14px] p-[5px] font-[Inter] font-bold" type="button">
+<button id="movesBtn" data-modal-target="default-modal" data-modal-toggle="default-modal" class=" bg-rock bg-water bg-poison bg-fairy bg-ghost bg-fighting bg-dark bg-dragon bg-electric bg-flying bg-ground bg-ice bg-psychic bg-steel bg-normal bg-bug bg-grass bg-fire cursor-pointer text-white  rounded-[14px] p-[5px] font-[Inter] font-bold" type="button">
     Moves
   </button>
   
@@ -80,12 +85,10 @@
               </div>
               <!-- Modal body -->
               <div class="p-4 md:p-5 space-y-4">
-                  <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+                  <p id="moves" class=" text-[10px] text-base leading-relaxed text-gray-500 dark:text-gray-400">
                      
                   </p>
-                  <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-                     
-                  </p>
+                  
               </div>
               <!-- Modal footer -->
           </div>
@@ -93,7 +96,7 @@
   </div>
   
         <!-- Modal toggle -->
-<button data-modal-target="default-modal2" data-modal-toggle="default-modal2" class="cursor-pointer text-white bg-fire rounded-[14px] p-[5px] font-[Inter] font-bold mt-3" type="button">
+<button id="evolutionBtn" data-modal-target="default-modal2" data-modal-toggle="default-modal2" class="bg-rock bg-water bg-poison bg-fairy bg-ghost bg-fighting bg-dark bg-dragon bg-electric bg-flying bg-ground bg-ice bg-psychic bg-steel bg-normal bg-bug bg-grass bg-fire cursor-pointer text-white rounded-[14px] p-[5px] font-[Inter] font-bold mt-3" type="button">
     Evolution
   </button>
   
@@ -116,20 +119,18 @@
               </div>
               <!-- Modal body -->
               <div class="p-4 md:p-5 space-y-4">
-                  <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+                  <div id="evolution" class=" flex flex-row justify-center">
                      
-                  </p>
-                  <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-                     
-                  </p>
+                  </div>
+                 
               </div>
               <!-- Modal footer -->
           </div>
       </div>
   </div>
     </div>
-    <img src="/assets/sparkling.png" class="w-[40px] h-[40px] relative left-[10px] bottom-[240px]" alt="Shiny Icon">
-    <p class="relative left-[10px] bottom-[730px] text-white font-[Inter] font-bold">#004</p>
+    <img id="shinyBtn" src="/assets/sparkling.png" class="w-[40px] h-[40px] relative left-[10px] bottom-[240px] cursor-pointer" alt="Shiny Icon">
+    <p id="pokemonIndex" class="relative left-[10px] bottom-[730px] text-white font-[Inter] font-bold w-[100px]">#004</p>
 
 
     
@@ -137,7 +138,7 @@
     </div>
 </div>
 
-
+    <script src="/scripts/app.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/flowbite@3.0.0/dist/flowbite.min.js"></script>
 </body>
 </html>
