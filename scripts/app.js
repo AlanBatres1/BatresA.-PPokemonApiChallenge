@@ -39,6 +39,7 @@ const getEvolutionChain = async (url) => {
     return data.chain;
 };
 
+
 // evolution images
 async function displayEvolutionChain(chain) {
     const evolutionImages = [];
@@ -61,10 +62,12 @@ async function displayEvolutionChain(chain) {
     });
 }
 
-// function to capitalize first letter of string
+
+// function to capitalize first letter
 function capitalize(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
+
 
 function updateFavBtn(pokemonName) {
     const favoritesList = getLocalStorage();
@@ -75,6 +78,7 @@ function updateFavBtn(pokemonName) {
         setFavBtn.src = "./assets/gaming.png";
     }
 }
+
 
 function createFavoriteItem(pokemonName) {
     const item = document.createElement('div');
@@ -89,7 +93,8 @@ function createFavoriteItem(pokemonName) {
         await searchBtn.click();
     });
     
-    // remove btn
+
+    //remove btn
     const removeBtn = document.createElement('button');
     removeBtn.textContent = 'x';
     removeBtn.className = 'text-fighting font-bold text-[20px] px-2 cursor-pointer';
@@ -98,7 +103,7 @@ function createFavoriteItem(pokemonName) {
         removeFromLocalStorage(pokemonName);
         item.remove();
         
-        // Update favorite button
+        //update favorite button
         if (pokemon.species && pokemon.species.name === pokemonName) {
             setFavBtn.src = "./assets/gaming.png";
         }
@@ -109,6 +114,7 @@ function createFavoriteItem(pokemonName) {
     
     return item;
 }
+
 
 // Shiny activation
 shinyBtn.addEventListener("click", () => {
@@ -122,6 +128,7 @@ shinyBtn.addEventListener("click", () => {
         }
     }
 });
+
 
 // Favorite button event listener
 setFavBtn.addEventListener("click", () => {
@@ -137,6 +144,7 @@ setFavBtn.addEventListener("click", () => {
     }
 });
 
+
 favBtn.addEventListener("click", async () => {
     const favoritesList = getLocalStorage();
     favorites.innerHTML = '';
@@ -151,12 +159,14 @@ favBtn.addEventListener("click", async () => {
     favorites.appendChild(container);
 });
 
+
 defaultSearch.addEventListener('keypress', function (e) {
     if (e.key === 'Enter') {
         searchBtn.click();
         console.log("enter")
     }
 });
+
 
 // Search button functionality
 searchBtn.addEventListener('click', async () => {
@@ -213,6 +223,7 @@ searchBtn.addEventListener('click', async () => {
         return;
     }
 });
+
 
 // Random button functionality
 randomBtn.addEventListener('click', async () => {
